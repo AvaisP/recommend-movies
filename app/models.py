@@ -39,3 +39,8 @@ class Movie(models.Model):
 	war = models.IntegerField(max_length=1)
 	western = models.IntegerField(max_length=1)
 
+class Rating(models.Model):
+	userid = models.IntegerField(unique = True)
+	movieid = models.IntegerField(unique = True)
+	rating = models.IntegerField()
+	time = models.IntegerField(max_length=9)
