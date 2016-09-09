@@ -6,15 +6,15 @@ class Greeting(models.Model):
 
 
 class User(models.Model):
-	userid = models.IntegerField(unique = True)
+	userid = models.IntegerField()
 	age = models.IntegerField()
 	sex = models.CharField(max_length=1)
 	occupation = models.CharField(max_length=50)
 	zipcode = models.IntegerField(max_length=20) 
-	avg = models.FloatField()
+	avg = models.FloatField(default=0.0)
 
 class Movie(models.Model):
-	movieid = models.IntegerField(unique = True)
+	movieid = models.IntegerField()
 	title = models.CharField(max_length=100)
 	date = models.CharField(max_length=100)
 	viddate = models.CharField(max_length=100)
@@ -40,7 +40,7 @@ class Movie(models.Model):
 	western = models.IntegerField(max_length=1)
 
 class Rating(models.Model):
-	userid = models.IntegerField(unique = True)
-	movieid = models.IntegerField(unique = True)
+	userid = models.IntegerField()
+	movieid = models.IntegerField()
 	rating = models.IntegerField()
 	time = models.IntegerField(max_length=9)
