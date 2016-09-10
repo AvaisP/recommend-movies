@@ -12,7 +12,7 @@ import app.views
 urlpatterns = [
     url(r'^$', app.views.index, name='index'),
     #url(r'^cluster/$', app.views.cluster, name='cluster'),
-    url(r'^id/$', app.views.getid, name='getid')
+    url(r'^id/$', app.views.getid, name='getid'),
     url(r'^db', app.views.db, name='db'),
     url(r'^admin/', include(admin.site.urls)),
 ]

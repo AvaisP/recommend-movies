@@ -36,3 +36,6 @@ def cluster(request):
     for i,cluster_label in enumerate(clustering.labels_):
             new_clusters[cluster_label].users.add(User.objects.get(userid=all_user_id[i]))
     return HttpResponse("Generated clusters")
+
+def getid(request):
+    return render(request, 'getid.html')
