@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Greeting,User,Movie,Rating,Cluster
 from sklearn.cluster import KMeans
@@ -38,4 +38,9 @@ def cluster(request):
     return HttpResponse("Generated clusters")
 
 def getid(request):
-    return render(request, 'getid.html')
+    if request.method == 'POST' :
+        userid = request.POST['userid']
+        request.session['id'] = userid
+        return redirect('/recommend/')
+    else:
+        return render(request, 'getid.html')
