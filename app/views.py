@@ -44,3 +44,18 @@ def getid(request):
         return redirect('/recommend/')
     else:
         return render(request, 'getid.html')
+
+def movies(request):
+    movies = Movie.objects.all().order_by('movieid')
+    return render(request, 'movies.html',{'movies':movies})
+
+def recommend(request):
+    rated = Rating.objects.filter(userid=request.session['id'])
+    rated_movie_id = set(map(lambda x: x.movieid, rated))
+    user_cluster_name = User.objects.get(userid=request.session['id']).cluster_set.first().name
+    other_users = Cluster.objects.get(name=user_cluster_name).users.exclude(userid=request.session['id']).all()
+    other_users_id = set(map(lambda x: x.userid, other_users))
+    recommend_obj = Rating.objects.filter(userid__in=other_users_id).exclude(movieid__in=rated_movie_id)
+    recommend_id = set(map(lambda x: x.movieid, recommend_obj))
+    recommend = Movie.objects.filter(movieid__in=recommend_id)
+    return render(request,'movies.html',{'movies':recommend})
